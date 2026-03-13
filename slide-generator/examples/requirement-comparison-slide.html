@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Requirements Comparison</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@900&family=Poppins:wght@400;500;600;700&family=Jost:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', 'Jost', Arial, sans-serif;
+    background: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    gap: 30px;
+  }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    background: #FBF4EA;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    padding: 44px 56px 36px;
+    display: flex;
+    flex-direction: column;
+    color: #0E1531;
+    flex-shrink: 0;
+  }
+
+  .slide-header {
+    margin-bottom: 24px;
+  }
+
+  .slide-header h1 {
+    font-family: 'Epilogue', Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #0E1531;
+  }
+
+  .slide-header p {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 13px;
+    color: #0E1531;
+    opacity: 0.5;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  .table-container {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    font-family: 'Poppins', Arial, sans-serif;
+    table-layout: fixed;
+  }
+
+  colgroup .col-id { width: 36px; }
+  colgroup .col-req { width: auto; }
+  colgroup .col-status { width: 210px; }
+
+  thead th {
+    background: #0E1531;
+    color: #FBF4EA;
+    font-weight: 600;
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  thead th:first-child {
+    border-radius: 8px 0 0 0;
+    text-align: center;
+    padding: 11px 8px;
+  }
+
+  thead th:nth-child(3),
+  thead th:nth-child(4) {
+    text-align: center;
+  }
+
+  thead th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+
+  tbody tr:nth-child(even) {
+    background: rgba(14, 21, 49, 0.03);
+  }
+
+  tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 8px;
+  }
+
+  tbody tr:last-child td:last-child {
+    border-radius: 0 0 8px 0;
+  }
+
+  tbody td {
+    padding: 9px 16px;
+    color: #0E1531;
+    font-weight: 400;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(14, 21, 49, 0.06);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody td:first-child {
+    text-align: center;
+    font-weight: 600;
+    opacity: 0.4;
+    font-size: 12px;
+    padding: 9px 8px;
+  }
+
+  tbody td:nth-child(2) {
+    font-weight: 500;
+  }
+
+  tbody td:nth-child(3),
+  tbody td:nth-child(4) {
+    text-align: center;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15px;
+    white-space: nowrap;
+    font-family: 'Jost', 'Poppins', Arial, sans-serif;
+  }
+
+  .s1 {
+    background: rgba(34, 139, 34, 0.12);
+    color: #1a6e1a;
+  }
+
+  .s2 {
+    background: rgba(130, 54, 251, 0.10);
+    color: #6a2bd4;
+  }
+
+  .s3 {
+    background: rgba(220, 53, 69, 0.10);
+    color: #b52533;
+  }
+
+  .status .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .s1 .dot { background: #228b22; }
+  .s2 .dot { background: #8236FB; }
+  .s3 .dot { background: #dc3545; }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    justify-content: flex-end;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #0E1531;
+    opacity: 0.55;
+    font-weight: 500;
+    font-family: 'Jost', 'Poppins', Arial, sans-serif;
+  }
+
+  .legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+
+  .ld1 { background: #228b22; }
+  .ld2 { background: #8236FB; }
+  .ld3 { background: #dc3545; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Requirements 1–11 -->
+<div class="slide">
+  <div class="slide-header">
+    <h1>Requirements Comparison: Infor vs AXP</h1>
+    <p>Check-in requirements coverage (1 of 2)</p>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col class="col-id">
+        <col class="col-req">
+        <col class="col-status">
+        <col class="col-status">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Requirement</th>
+          <th>Infor</th>
+          <th>AXP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Confidential Rate</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Room Type to Charge</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Primary Guests</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Additional Guests with Full ID Process</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Add/Edit Address, Telephone, Email</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Country-Specific ID Requirements</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Signed Registration Card &amp; Passport Photo to HMS</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Passport Photo into Profile (No Overwrite)</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Incidental Charges &amp; Confidential Rate Payment</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Pre-Payment Deposit 24-Hour Rule</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Support for 19 Languages</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot ld1"></div> 1 = Supported</div>
+    <div class="legend-item"><div class="legend-dot ld2"></div> 2 = Partially Supported</div>
+    <div class="legend-item"><div class="legend-dot ld3"></div> 3 = Development Required</div>
+  </div>
+</div>
+
+<!-- SLIDE 2: Requirements 12–21 -->
+<div class="slide">
+  <div class="slide-header">
+    <h1>Requirements Comparison: Infor vs AXP</h1>
+    <p>Check-in requirements coverage (2 of 2)</p>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <colgroup>
+        <col class="col-id">
+        <col class="col-req">
+        <col class="col-status">
+        <col class="col-status">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Requirement</th>
+          <th>Infor</th>
+          <th>AXP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>12</td>
+          <td>Confirmation Email with Review Link</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Hotel Receives Email on Pre-Check-In Completion</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>App Users Receive Push Notification Instead of Email</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Track Check-In Route (App vs Website)</td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Opt-Out of Check-In Comms (Consent)</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>ID Capture Scoped to Hotel, Not Brand</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Operations Visibility on Sent Notifications</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Pre Signature Confirmation</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s3"><span class="dot"></span>Development Required</span></td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>Previously Provided Information Pre-Populated</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>Capture of Guest Arrival and Guest Arrival Time</td>
+          <td><span class="status s1"><span class="dot"></span>Supported</span></td>
+          <td><span class="status s2"><span class="dot"></span>Partially Supported</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot ld1"></div> 1 = Supported</div>
+    <div class="legend-item"><div class="legend-dot ld2"></div> 2 = Partially Supported</div>
+    <div class="legend-item"><div class="legend-dot ld3"></div> 3 = Development Required</div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Analytics Overview -->
+<div class="slide" style="padding:44px 56px 36px;">
+  <div class="slide-header" style="margin-bottom:20px;">
+    <h1>Digital Check-In Reporting (AXP)</h1>
+    <p>A single view of guest adoption, performance and friction across the check-in journey</p>
+  </div>
+
+  <div style="flex:1; display:flex; gap:28px; overflow:hidden;">
+
+    <!-- Left column: Key Questions + What We Measure -->
+    <div style="flex:1; display:flex; flex-direction:column; gap:20px;">
+
+      <!-- Three Core Questions -->
+      <div style="background:#0E1531; border-radius:10px; padding:20px 22px;">
+        <div style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:14px; color:#FBF4EA; margin-bottom:12px;">Three Questions We Answer</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#8236FB; color:#fff; font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+            <span style="font-family:'Jost',Arial,sans-serif; font-size:13px; color:#FBF4EA; line-height:1.4;">How many guests are using digital check-in?</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#8236FB; color:#fff; font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+            <span style="font-family:'Jost',Arial,sans-serif; font-size:13px; color:#FBF4EA; line-height:1.4;">How well does it perform (speed, success vs failure)?</span>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:10px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#8236FB; color:#fff; font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+            <span style="font-family:'Jost',Arial,sans-serif; font-size:13px; color:#FBF4EA; line-height:1.4;">Where are bottlenecks by brand, property or step?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- What We Measure -->
+      <div style="background:rgba(14,21,49,0.04); border-radius:10px; padding:18px 22px; flex:1;">
+        <div style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:13px; color:#0E1531; margin-bottom:12px;">What We Measure</div>
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div>
+            <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#8236FB; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Adoption &amp; Volume</div>
+            <div style="font-family:'Jost',Arial,sans-serif; font-size:12px; color:#0E1531; opacity:0.75; line-height:1.5;">Total arrivals vs digital check-in usage, trends over time by property/brand</div>
+          </div>
+          <div>
+            <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#8236FB; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Completion &amp; Failure</div>
+            <div style="font-family:'Jost',Arial,sans-serif; font-size:12px; color:#0E1531; opacity:0.75; line-height:1.5;">Status breakdown (completed / failed / abandoned), first failed step to pinpoint friction</div>
+          </div>
+          <div>
+            <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#8236FB; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Timing &amp; Behaviour</div>
+            <div style="font-family:'Jost',Arial,sans-serif; font-size:12px; color:#0E1531; opacity:0.75; line-height:1.5;">Lead time before arrival, number of attempts per booking, first-time success rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: Views + Duration + Reach + Segmentation -->
+    <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+
+      <!-- Historical vs Live -->
+      <div style="display:flex; gap:14px;">
+        <div style="flex:1; background:rgba(14,21,49,0.04); border-radius:10px; padding:16px 18px;">
+          <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#0E1531; margin-bottom:6px;">Historical Report</div>
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11.5px; color:#0E1531; opacity:0.7; line-height:1.5;">Daily refresh. Trend analysis, optimisation &amp; benchmarking across markets</div>
+        </div>
+        <div style="flex:1; background:rgba(14,21,49,0.04); border-radius:10px; padding:16px 18px;">
+          <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#0E1531; margin-bottom:6px;">Live Report</div>
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11.5px; color:#0E1531; opacity:0.7; line-height:1.5;">Near real-time. Day-of-arrival monitoring &amp; rapid issue detection</div>
+        </div>
+      </div>
+
+      <!-- Duration & Step-Level -->
+      <div style="background:rgba(14,21,49,0.04); border-radius:10px; padding:16px 18px;">
+        <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#0E1531; margin-bottom:6px;">Check-In Duration &amp; Step-Level Insight</div>
+        <div style="font-family:'Jost',Arial,sans-serif; font-size:11.5px; color:#0E1531; opacity:0.7; line-height:1.5;">
+          Total time from first attempt to completion with median/average toggle. Time per step (per attempt &amp; per booking) to identify slow or complex steps. Handles multi-step &amp; legacy page formats.
+        </div>
+      </div>
+
+      <!-- Reach & Campaign -->
+      <div style="background:rgba(130,54,251,0.06); border-radius:10px; padding:16px 18px;">
+        <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#6a2bd4; margin-bottom:8px;">Reach &amp; Campaign Effectiveness</div>
+        <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11px; color:#0E1531; opacity:0.6; white-space:nowrap;">Total Arrivals</div>
+          <div style="flex:1; height:1px; border-top:1px dashed rgba(14,21,49,0.2);"></div>
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11px; color:#0E1531; opacity:0.6; white-space:nowrap;">Received Email</div>
+          <div style="flex:1; height:1px; border-top:1px dashed rgba(14,21,49,0.2);"></div>
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11px; color:#0E1531; opacity:0.6; white-space:nowrap;">Started</div>
+          <div style="flex:1; height:1px; border-top:1px dashed rgba(14,21,49,0.2);"></div>
+          <div style="font-family:'Jost',Arial,sans-serif; font-size:11px; color:#6a2bd4; font-weight:600; white-space:nowrap;">Completed</div>
+        </div>
+        <div style="font-family:'Jost',Arial,sans-serif; font-size:11px; color:#0E1531; opacity:0.65; line-height:1.5; margin-top:6px;">
+          Conversion &amp; drop-off at each stage. Dynamic step completion chart (required vs optional steps).
+        </div>
+      </div>
+
+      <!-- Segmentation -->
+      <div style="background:rgba(14,21,49,0.04); border-radius:10px; padding:16px 18px; flex:1;">
+        <div style="font-family:'Poppins',Arial,sans-serif; font-weight:600; font-size:11.5px; color:#0E1531; margin-bottom:6px;">Segmentation &amp; Filters</div>
+        <div style="font-family:'Jost',Arial,sans-serif; font-size:11.5px; color:#0E1531; opacity:0.7; line-height:1.5;">
+          Property-level performance with volume filters. Segment by market, rate, source, nights. Badge/loyalty tier filtering. Kiosk vs pure online separation.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SLIDE 4: Summary -->
+<div class="slide">
+  <div class="slide-header">
+    <h1>Requirements Summary</h1>
+    <p>Overall coverage across 21 requirements</p>
+  </div>
+
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; gap:80px;">
+
+    <!-- Infor -->
+    <div style="flex:1; max-width:480px;">
+      <div style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:22px; color:#0E1531; margin-bottom:28px;">Infor</div>
+
+      <div style="margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#1a6e1a;">Supported</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#1a6e1a;">15</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:71.4%; height:100%; background:#228b22; border-radius:6px;"></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#6a2bd4;">Partially Supported</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#6a2bd4;">0</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:0%; height:100%; background:#8236FB; border-radius:6px;"></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#b52533;">Development Required</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#b52533;">6</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:28.6%; height:100%; background:#dc3545; border-radius:6px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div style="width:1px; height:280px; background:rgba(14,21,49,0.1);"></div>
+
+    <!-- AXP -->
+    <div style="flex:1; max-width:480px;">
+      <div style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:22px; color:#0E1531; margin-bottom:28px;">AXP</div>
+
+      <div style="margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#1a6e1a;">Supported</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#1a6e1a;">7</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:33.3%; height:100%; background:#228b22; border-radius:6px;"></div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#6a2bd4;">Partially Supported</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#6a2bd4;">8</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:38.1%; height:100%; background:#8236FB; border-radius:6px;"></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+          <span style="font-family:'Jost',Arial,sans-serif; font-size:14px; font-weight:600; color:#b52533;">Development Required</span>
+          <span style="font-family:'Epilogue',Arial,sans-serif; font-weight:900; font-size:28px; color:#b52533;">6</span>
+        </div>
+        <div style="width:100%; height:28px; background:rgba(14,21,49,0.06); border-radius:6px; overflow:hidden;">
+          <div style="width:28.6%; height:100%; background:#dc3545; border-radius:6px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:flex; justify-content:center; gap:8px; margin-top:16px; font-family:'Jost',Arial,sans-serif; font-size:12px; color:#0E1531; opacity:0.45;">
+    <span>Out of 21 total requirements</span>
+  </div>
+</div>
+
+</body>
+</html>
